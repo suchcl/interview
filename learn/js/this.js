@@ -88,16 +88,43 @@ var obj = {
 // foo2(); // 2 foo2 = foo,是将foo函数的内存地址赋值给了foo2，所以this指向的还是window
 
 // 7
+// function foo() {
+//   console.log(this.a);
+// }
+// var obj = { a: 1, foo };
+// var a = 2;
+// var foo2 = obj.foo;
+// var obj2 = {
+//   a: 3,
+//   foo2: obj.foo,
+// };
+// obj.foo(); // 1,obj调用的函数,foo的
+// foo2(); // 2
+// obj2.foo2(); // 3
+
+// 8
+// function foo() {
+//   console.log(this.a);
+// }
+// function doFoo(fn) {
+//   console.log(this); // window
+//   fn();
+// }
+// var obj = { a: 1, foo };
+// var a = 2;
+// doFoo(obj.foo); // window 2,注意obj.foo没有小括号，就说明这个函数并没有执行，所以obj.foo是没有打印输出的，只是一个参数而已
+
+// 9
 function foo() {
   console.log(this.a);
 }
+
+function doFoo(fn) {
+  console.log(this);
+  fn();
+}
+
 var obj = { a: 1, foo };
 var a = 2;
-var foo2 = obj.foo;
-var obj2 = {
-  a: 3,
-  foo2: obj.foo,
-};
-obj.foo(); // 1,obj调用的函数,foo的
-foo2(); // 2
-obj2.foo2(); // 3
+var obj2 = { a: 3, doFoo };
+obj2.doFoo(obj.foo); //obj2,2
