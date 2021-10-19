@@ -521,3 +521,186 @@
 // person2.foo().call(person2); // person2,person2
 
 // 33
+// var obj = {
+//   name: "obj",
+//   foo1: () => {
+//     // foo1箭头函数，其作用域是外层作用域，外层作用域也就是window
+//     console.log(this.name);
+//   },
+//   foo2: function () {
+//     console.log(this.name);
+//     return () => {
+//       console.log(this.name);
+//     };
+//   },
+// };
+// var name = "window";
+// obj.foo1(); // window
+// obj.foo2()(); // obj, obj
+
+// 34
+// var name = "window";
+// var obj1 = {
+//   name: "obj1",
+//   foo: function () {
+//     console.log(this.name);
+//   },
+// };
+// var obj2 = {
+//   name: "obj2",
+//   foo: () => {
+//     console.log(this.name);
+//   },
+// };
+// obj1.foo(); // obj1
+// obj2.foo(); // window
+
+// 35
+// var name = "window";
+// var obj1 = {
+//   name: "obj1",
+//   foo: function () {
+//     console.log(this.name);
+//     return function () {
+//       console.log(this.name);
+//     };
+//   },
+// };
+
+// var obj2 = {
+//   name: "obj2",
+//   foo: function () {
+//     console.log(this.name);
+//     return () => {
+//       // this为定义箭头函数时的作用域，即obj2
+//       console.log(this.name);
+//     };
+//   },
+// };
+
+// var obj3 = {
+//   name: "obj3",
+//   foo: () => {
+//     // 箭头函数为定义时的外层作用域，即window
+//     console.log(this.name);
+//     return function () {
+//       // 匿名函数，this指向window
+//       console.log(this.name);
+//     };
+//   },
+// };
+
+// var obj4 = {
+//   name: "obj4",
+//   foo: () => {
+//     // 箭头函数的this指向定义时的外层作用域，即window
+//     console.log(this.name);
+//     return () => {
+//       // 箭头函数this指向定义时的作用域，该函数定义时的作用域为window
+//       console.log(this.name);
+//     };
+//   },
+// };
+
+// obj1.foo()(); // obj1, window
+// obj2.foo()(); //obj2, obj2
+// obj3.foo()(); // window,window
+// obj4.foo()(); // window,window
+
+// 36
+// var name = "window";
+// function Person(name) {
+//   this.name = name;
+//   this.foo1 = function () {
+//     console.log(this.name);
+//   };
+//   // 箭头函数的外部作用域为Person
+//   this.foo2 = () => {
+//     console.log(this.name);
+//   };
+// }
+// var person2 = {
+//   name: "person2",
+//   foo2: () => {
+//     console.log(this.name);
+//   },
+// };
+// var person1 = new Person("person1");
+// person1.foo1(); // person1
+// person1.foo2(); // person1
+// person2.foo2(); // window
+
+// 36
+// var name = "window";
+// function Person(name) {
+//   this.name = name;
+//   this.foo1 = function () {
+//     console.log(this.name);
+//     return function () {
+//       // 对象中的匿名函数，也指向window
+//       console.log(this.name);
+//     };
+//   };
+//   this.foo2 = function () {
+//     console.log(this.name);
+//     return () => {
+//       // this指向外层作用域，对象中定义的，Person
+//       console.log(this.name);
+//     };
+//   };
+//   this.foo3 = () => {
+//     // 箭头函数，this指向外部作用域Person
+//     console.log(this.name);
+//     return function () {
+//       // 匿名函数，this指向window
+//       console.log(this.name);
+//     };
+//   };
+//   this.foo4 = () => {
+//     // this指向Person
+//     console.log(this.name);
+//     return () => {
+//       // 指向外部作用域的this，即Person
+//       console.log(this.name);
+//     };
+//   };
+// }
+// var person1 = new Person("person1");
+// person1.foo1()(); // person1, window
+// person1.foo2()(); // person1, person1
+// person1.foo3()(); // person1, window
+// person1.foo4()(); // person1, person1
+
+// 37
+var name = "window";
+var obj1 = {
+  name: "obj1",
+  foo1: function () {
+    console.log(this.name);
+    return () => {
+      console.log(this.name);
+    };
+  },
+  foo2: () => {
+    // this指向外层作用域：window
+    console.log(this.name);
+    return function () {
+      // 匿名函数，this指向window
+      console.log(this.name);
+    };
+  },
+};
+
+var obj2 = {
+  name: "obj2",
+};
+obj1.foo1.call(obj2)(); // obj2,obj2 foo1返回函数的作用域被call给转向到了obj2
+obj1.foo1().call(obj2); //obj1,obj1
+/**
+ * obj1.foo1().call(obj2) 解释
+ * obj1.foo1()：打印的是obj1，比较容易理解
+ * 但是内部的返回函数，按照常理应该是绑定给了obj2，所以返回 函数的this指向的是obj2，但是有一点我们需要注意：
+ * 箭头函数的this指向，也是作用域，是在函数定义时定义的，而不是在函数执行时决定的，即便使用了call也不会改变这个规则
+ */
+obj1.foo2.call(obj2)(); // window,window
+obj1.foo2().call(obj2); // window,obj2
