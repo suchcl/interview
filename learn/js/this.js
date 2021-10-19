@@ -432,20 +432,92 @@
 //  */
 
 // 28
-function foo(item) {
-  console.log(item, this.a);
-}
-var obj = {
-  a: "obj",
-};
-var a = "window";
-var arr = [1, 2, 3];
-arr.filter(function (i) {
-  console.log(i, this.a);
-  /**
-   * 1 obj
-   * 2 obj
-   * 3 obj
-   */
-  return i > 2;
-}, obj);
+// function foo(item) {
+//   console.log(item, this.a);
+// }
+// var obj = {
+//   a: "obj",
+// };
+// var a = "window";
+// var arr = [1, 2, 3];
+// arr.filter(function (i) {
+//   console.log(i, this.a);
+//   /**
+//    * 1 obj
+//    * 2 obj
+//    * 3 obj
+//    */
+//   return i > 2;
+// }, obj);
+
+// 29
+// function Person(name) {
+//   this.name = name;
+// }
+// var name = "window";
+// var person1 = new Person("Nicholas");
+// console.log(person1.name); // Nicholas
+
+// 30
+// function Person(name) {
+//   this.name = name;
+//   this.foo1 = function () {
+//     console.log(this.name);
+//   };
+//   this.foo2 = function () {
+//     return function () {
+//       console.log(this.name);
+//     };
+//   };
+// }
+// var person1 = new Person("p1");
+// person1.foo1(); // p1
+// person1.foo2()(); // 空值，没有输出
+/**
+ * 比较有意思的是，一开始给输出了一个window，原来是我之前代码中定义过name属性赋值为window，var name="window",代码删除了之后，浏览器也不会回收
+ * 当前的浏览器标签页关掉了才可以回收之前window上的属性
+ */
+
+// 31
+// var name = "Nicholas";
+// function Person(name) {
+//   this.name = name;
+//   this.foo = function () {
+//     console.log(this.name);
+//     return function () {
+//       console.log(this.name);
+//     };
+//   };
+// }
+// var person2 = {
+//   name: "person2",
+//   foo: function () {
+//     console.log(this.name);
+//     return function () {
+//       console.log(this.name);
+//     };
+//   },
+// };
+
+// var person1 = new Person("person1");
+// person1.foo()(); //person1,Nicholas
+// person2.foo()(); //person2,Nicholas
+
+// 32
+// var name = "window";
+// function Person(name) {
+//   this.name = name;
+//   this.foo = function () {
+//     console.log(this.name);
+//     return function () {
+//       console.log(this.name);
+//     };
+//   };
+// }
+
+// var person1 = new Person("person1");
+// var person2 = new Person("person2");
+// person1.foo.call(person2)(); // person2,widnow
+// person2.foo().call(person2); // person2,person2
+
+// 33
