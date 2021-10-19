@@ -672,35 +672,191 @@
 // person1.foo4()(); // person1, person1
 
 // 37
-var name = "window";
-var obj1 = {
-  name: "obj1",
-  foo1: function () {
-    console.log(this.name);
-    return () => {
-      console.log(this.name);
-    };
-  },
-  foo2: () => {
-    // this指向外层作用域：window
-    console.log(this.name);
-    return function () {
-      // 匿名函数，this指向window
-      console.log(this.name);
-    };
-  },
-};
+// var name = "window";
+// var obj1 = {
+//   name: "obj1",
+//   foo1: function () {
+//     console.log(this.name);
+//     return () => {
+//       console.log(this.name);
+//     };
+//   },
+//   foo2: () => {
+//     // this指向外层作用域：window
+//     console.log(this.name);
+//     return function () {
+//       // 匿名函数，this指向window
+//       console.log(this.name);
+//     };
+//   },
+// };
 
-var obj2 = {
-  name: "obj2",
-};
-obj1.foo1.call(obj2)(); // obj2,obj2 foo1返回函数的作用域被call给转向到了obj2
-obj1.foo1().call(obj2); //obj1,obj1
-/**
- * obj1.foo1().call(obj2) 解释
- * obj1.foo1()：打印的是obj1，比较容易理解
- * 但是内部的返回函数，按照常理应该是绑定给了obj2，所以返回 函数的this指向的是obj2，但是有一点我们需要注意：
- * 箭头函数的this指向，也是作用域，是在函数定义时定义的，而不是在函数执行时决定的，即便使用了call也不会改变这个规则
- */
-obj1.foo2.call(obj2)(); // window,window
-obj1.foo2().call(obj2); // window,obj2
+// var obj2 = {
+//   name: "obj2",
+// };
+// obj1.foo1.call(obj2)(); // obj2,obj2 foo1返回函数的作用域被call给转向到了obj2
+// obj1.foo1().call(obj2); //obj1,obj1
+// /**
+//  * obj1.foo1().call(obj2) 解释
+//  * obj1.foo1()：打印的是obj1，比较容易理解
+//  * 但是内部的返回函数，按照常理应该是绑定给了obj2，所以返回 函数的this指向的是obj2，但是有一点我们需要注意：
+//  * 箭头函数的this指向，也是作用域，是在函数定义时定义的，而不是在函数执行时决定的，即便使用了call也不会改变这个规则
+//  */
+// obj1.foo2.call(obj2)(); // window,window
+// obj1.foo2().call(obj2); // window,obj2
+
+// 38
+// 箭头函数不能定义对象方法
+// let obj = {
+//   value: "Nicholas Zakas",
+//   getValue: () => {
+//     // this指向window，现在window不存在属性value
+//     console.log(this.value);
+//   },
+// };
+
+// obj.getValue(a); //undefined
+
+// 箭头函数不要定义原型方法
+// function Foo(value) {
+//   this.value = value;
+// }
+
+// Foo.prototype.getValue = () => {
+//   /**
+//    * this指向window
+//    * 定义时的作用域为外层作用域，Foo的作用域为window
+//    */
+//   console.log(this.value); // 打印的是window的value
+// };
+// var foo = new Foo("hahha");
+// foo.getValue(); // undefined
+
+// 构造函数不要使用箭头函数
+// const Foo = (value) => {
+//   this.value = value;
+// };
+// const foo1 = new Foo("heheh");
+// console.log(foo1); // Uncaught TypeError: Foo is not a constructor
+
+//箭头函数不适合做事件的回调函数
+// const btn = document.getElementById("btn");
+// btn.addEventListener("click", () => {
+//   console.log(this); // this指向了window
+//   this.innerText = "啊大方"；
+// });
+
+// 39
+// var name = "window";
+// var person1 = {
+//   name: "person1",
+//   foo1: function () {
+//     console.log(this.name);
+//   },
+//   foo2: () => {
+//     console.log(this.name);
+//   },
+//   foo3: function () {
+//     return function () {
+//       console.log(this.name);
+//     };
+//   },
+//   foo4: function () {
+//     return () => {
+//       console.log(this.name);
+//     };
+//   },
+// };
+// var person2 = {
+//   name: "person2",
+// };
+// person1.foo1(); // person1
+// person1.foo1.call(person2); // person2
+// person1.foo2(); // window
+// person1.foo2.call(person2); // window
+// person1.foo3()(); //window
+// person1.foo3.call(person2)(); // window  注意返回的是一个函数，而不是绑定了this的函数
+// person1.foo3().call(person2); // person2
+// person1.foo4()(); // person1 person1.foo4()的作用域是person1
+// person1.foo4.call(person2)(); // person2
+// person1.foo4().call(person2); // person1 箭头函数使用call不会重新绑定this
+
+// 40
+// var name = "window";
+// function Person(name) {
+//   this.name = name;
+//   this.foo1 = function () {
+//     console.log(this.name);
+//   };
+//   this.foo2 = () => {
+//     console.log(this.name);
+//   };
+//   this.foo3 = function () {
+//     return function () {
+//       console.log(this.name);
+//     };
+//   };
+//   this.foo4 = function () {
+//     return () => {
+//       console.log(this.name);
+//     };
+//   };
+// }
+
+// var person1 = new Person("person1");
+// var person2 = new Person("person2");
+// person1.foo1(); // person1
+// person1.foo1.call(person2); // person2
+
+// person1.foo2(); // person1
+// person1.foo2.call(person2); // person1 箭头函数在执行时通过call、apply、bind是不会起作用的
+
+// person1.foo3()(); // window
+// person1.foo3.call(person2)(); // window
+// person1.foo3().call(person2); // person2
+
+// person1.foo4()(); // person1
+// person1.foo4.call(person2)(); // person2
+// person1.foo4().call(person2); // person1 箭头函数执行时通过call已经不生效了,作用域由外层函数决定
+
+// 41
+// var name = "window";
+// function Person(name) {
+//   this.name = name;
+//   this.obj = {
+//     name: "obj",
+//     foo1: function () {
+//       return function () {
+//         // 匿名函数，指向window
+//         console.log(this.name);
+//       };
+//     },
+//     foo2: function () {
+//       return () => {
+//         console.log(this.name);
+//       };
+//     },
+//   };
+// }
+
+// var person1 = new Person("person1");
+// var person2 = new Person("person2");
+
+// person1.obj.foo1()(); // window
+// person1.obj.foo1.call(person2); // 执行结果只是返回来一个函数，没有打印输出
+// person1.obj.foo1().call(person2); // person2
+
+// person1.obj.foo2()(); // obj
+// person1.obj.foo2.call(person2)(); // person2
+// person1.obj.foo2().call(person2); // obj
+
+//42
+
+function foo() {
+  console.log(this.a);
+}
+var a = 2;
+(function () {
+  "use strict";
+  foo(); // 注意调用foo的依旧是window，所以打印的是window.a 2
+})();
