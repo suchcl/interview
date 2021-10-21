@@ -852,11 +852,50 @@
 
 //42
 
-function foo() {
-  console.log(this.a);
-}
-var a = 2;
-(function () {
-  "use strict";
-  foo(); // 注意调用foo的依旧是window，所以打印的是window.a 2
-})();
+// function foo() {
+//   console.log(this.a);
+// }
+// var a = 2;
+// (function () {
+//   "use strict";
+//   foo(); // 注意调用foo的依旧是window，所以打印的是window.a 2
+// })();
+
+// function printArgs() {
+//   console.log(arguments);
+//   console.log(arguments instanceof Array); // false,说明arguments不是Array，不是数组
+//   console.log(arguments[0], arguments[3]); // a, { foo: "Hello,arguments" },说明通过arguments对象的下标取到了值
+// }
+// printArgs("a", "A", 0, { foo: "Hello,arguments" });
+
+// 43
+// var length = 10;
+// function fn() {
+//   console.log(this.length);
+// }
+// var obj = {
+//   length: 5,
+//   method: function () {
+//     fn();
+//     arguments[0]();
+//   },
+// };
+// obj.method(fn, 1); // 10,2 arguments调用了fn，arguments有2个参数，所以其调用的length属性为其内置属性，结果为2
+
+// 44 实现bind
+Function.prototype.bind = function () {
+  var args = arguments;
+  // 获取新的上下文
+  var context = args[0];
+  // 保存当前函数
+  var func = this;
+  // 获取其他参数
+  var thisArgs = Function.prototype.slice.call(arguments, 1);
+  var returnFunc = function () {
+    // 合并两次获取到的参数
+    Array.prototype.push.apply(thisArgs, arguments);
+    // 使用apply改变上下文
+    return func.apply(context, thisArgs);
+  };
+  return returnFunc;
+};
