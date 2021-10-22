@@ -85,3 +85,21 @@
  * 算法题
  * 爬楼梯，楼梯有n阶，每次可以爬1或2各台阶，有多少种爬法可以爬到楼顶   n是整数
  */
+
+// function foo() {
+//   console.log(this.a);
+// }
+// function doFoo(fn) {
+//   console.log(this);
+//   fn();
+// }
+// var obj = {
+//   a: 1,
+//   foo,
+// };
+// var a = 2;
+// var obj2 = {
+//   a: 3,
+//   doFoo,
+// };
+// obj2.doFoo(obj.foo); // obj2, 2
