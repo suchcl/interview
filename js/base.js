@@ -53,7 +53,78 @@
 // person.name = "Hanmeimei"; // 可以正常修改对象的属性值
 // console.log(person.name); // Hanmeimei
 
-console.log(typeof value);
-if (true) {
-    let value = "Nicholas Zakas";
+// console.log(typeof value);
+// if (true) {
+//     let value = "Nicholas Zakas";
+// }
+
+// function person() {
+//     var uname = "a";
+//     if (true) {
+//         console.log(uname); // a
+//         var uname = "b";
+//         console.log(uname); // b
+//     } else {
+//         console.log(uname);
+//         // let uname = "c";
+//     }
+// }
+// person();
+
+// function fn(){
+//     var uname = "a";
+//     if(true){
+//         // if块内是一个独立的块级作用域，该内部有let声明了变量，就不会再受外部的干扰，外部的var uname不会对这个块内产生任何的作用
+//         console.log(uname);
+//         let uname = "b"; // Uncaught ReferenceError: Cannot access 'uname' before initialization
+//     }
+// }
+// fn();
+
+// 实现防抖
+// function debounce(fn, delay) {
+//     let timer = null;
+//     return function () {
+//         if (timer) {
+//             clearTimeout(timer);
+//         }
+//         timer = setTimeout(fn,delay);
+//     }
+// }
+
+
+// function cal(){
+//     var sum = 0;
+//     for(var i = 0; i < 10000000; i++){
+//         sum += i * i
+//     }
+//     console.log(sum);
+// }
+
+// window.onscroll = debounce(cal,2000);
+
+
+// 节流
+function debounce(fn,delay){
+    // 加一个标志位，让函数可以
+    let flag = true;
+    return function(){
+        if(!flag){
+            return false;
+        }
+        flag = false;
+        setTimeout(() => {
+            fn();
+            flag = true;
+        },delay);
+    }
 }
+
+function cal(){
+    var sum = 0;
+    for(var i = 0; i < 1000; i++){
+        sum += i * 25;
+    }
+    console.log(sum);
+}
+window.onscroll = debounce(cal,1000);
