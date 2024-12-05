@@ -1,16 +1,28 @@
 let btn = document.querySelector("#btn");
-btn.addEventListener("click", function(){
-    
-});
 
-function debounce(fn,delay){
-
+function handle(e){
+    console.log('%c [  ]-5', 'font-size:13px; background:pink; color:#bf2c9f;', "22222", this, e);
 }
 
-const a = 10;
-var b = 20;
+btn.addEventListener("click", debounce(handle));
 
-function test(){
-    console.log('%c [  ]-14', 'font-size:13px; background:pink; color:#bf2c9f;', this.a, this, this.b)
+// function debounce(fn, delay = 1000){
+//     let timer = null;
+//     return function(e){
+//         if(timer){
+//             clearTimeout(timer);
+//         }
+//         timer = setTimeout(() => {
+//             fn.call(this, e); // 改变this指向，默认setTimeout中的this会指向window
+//         }, delay);
+//     }
+// }
+
+
+function debounce(fn, delay = 1000){
+    return function(e){
+        setTimeout(function(){
+            fn();
+        }, delay);
+    }
 }
-// test();
