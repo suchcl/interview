@@ -31,3 +31,20 @@ function removeDup(arr){
     return targetArr;
 }
 console.log('%c [ 通过forEach和includes实现数组去重 (arr3) ]-34', 'font-size:13px; background:pink; color:#bf2c9f;', removeDup(arr3))
+
+
+const arr5 = [2, 3, 1, 2, 2, 3, 4, 4, 5];
+
+function removeDupByKey(arr){
+    const tempObj = {};
+    const targetArr = [];
+    arr.forEach(item => {
+        if(!tempObj[item]){
+            tempObj[item] = true;
+            targetArr.push(item);
+        }
+    });
+    return targetArr;
+}
+
+console.log('%c [ 通过对象属性名的判断方式实现数组去重 (arr5) ]-50', 'font-size:13px; background:pink; color:#bf2c9f;', removeDupByKey(arr5))
