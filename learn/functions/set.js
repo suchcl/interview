@@ -29,3 +29,7 @@ console.log('%c [  ]-28', 'font-size:13px; background:pink; color:#bf2c9f;', col
 for(let color of colorsSet.values()){
     console.log('%c [ color ]-30', 'font-size:13px; background:pink; color:#bf2c9f;', color)
 }
+
+for(let color of colorsSet.entries()){
+    console.log('%c [ color ]-34', 'font-size:13px; background:pink; color:#bf2c9f;', color);
+}
