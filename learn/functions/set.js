@@ -15,3 +15,16 @@ if(setWithArr.has(4)){
 
 setWithArr.clear();
 console.log('%c [ setWithArr ]-17', 'font-size:13px; background:pink; color:#bf2c9f;', setWithArr)
+
+const obj = {
+    name: "Nichoalas Zakas",
+    age: 12
+};
+
+console.log('%c [  ]-24', 'font-size:13px; background:pink; color:#bf2c9f;', obj.keys)
+
+const colors = ["red", "blue", "green", "orange"];
+const colorsSet = new Set(colors);
+for(let color of colorsSet.keys()){
+    console.log('%c [ color ]-25', 'font-size:13px; background:pink; color:#bf2c9f;', color)
+}
