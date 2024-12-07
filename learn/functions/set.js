@@ -33,3 +33,7 @@ for(let color of colorsSet.values()){
 for(let color of colorsSet.entries()){
     console.log('%c [ color ]-34', 'font-size:13px; background:pink; color:#bf2c9f;', color);
 }
+
+for(let color of colorsSet){
+    console.log('%c [ color ]-38', 'font-size:13px; background:pink; color:#bf2c9f;', color);
+}
