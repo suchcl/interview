@@ -37,3 +37,8 @@ for(let color of colorsSet.entries()){
 for(let color of colorsSet){
     console.log('%c [ color ]-38', 'font-size:13px; background:pink; color:#bf2c9f;', color);
 }
+
+colorsSet.forEach((value,key) => {
+    console.log('%c [ key ]-42', 'font-size:13px; background:pink; color:#bf2c9f;', key)
+    console.log('%c [ value ]-43', 'font-size:13px; background:pink; color:#bf2c9f;', value)
+});
