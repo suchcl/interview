@@ -1,5 +1,6 @@
 let nums1 = [1, 2, 3, 0, 0, 0], m = 3;
 let nums2 = [2, 5, 6], n = 3;
+// 数组合并
 function merge(arr1, m, arr2, n) {
     let i = m - 1;
     let j = n - 1;
@@ -15,3 +16,5 @@ function merge(arr1, m, arr2, n) {
 
 merge(nums1, 3, nums2, 3);
 console.log('%c [ nums1 ]-17', 'font-size:13px; background:pink; color:#bf2c9f;', nums1)
+
+
