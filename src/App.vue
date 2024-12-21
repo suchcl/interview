@@ -17,9 +17,6 @@
 </template>
 
 <style scoped>
-ul,li {
-  list-style: none;
-}
 .menu {
   display: flex;
   justify-content: center;
