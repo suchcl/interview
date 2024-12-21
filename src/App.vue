@@ -1,33 +1,40 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import Home from "./pages/home/index.vue";
 </script>
 
 <template>
-  <ul>
+  <ul class="menu">
     <li>
       <RouterLink to="/home">首页</RouterLink>
     </li>
     <li>
       <RouterLink to="/list">列表页</RouterLink>
     </li>
+    <li>
+      <router-link to="/test">功能测试页面</router-link>
+    </li>
   </ul>
   <RouterView />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+ul,li {
+  list-style: none;
 }
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  li {
+    margin: 0 15px;
+    a {
+      color: #333;
+      &:hover{
+        color: #f20;
+      }
+      &.router-link-active{
+        color: #f20;
+      }
+    }
+  }
 }
 </style>
