@@ -14,6 +14,7 @@
     </li>
   </ul>
   <RouterView />
+  <h3 class="initial">这是一个初始页面</h3>
 </template>
 
 <style scoped>
@@ -33,5 +34,8 @@
       }
     }
   }
+}
+.initial {
+  
 }
 </style>

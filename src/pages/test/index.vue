@@ -17,6 +17,7 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { data, student, tempData, str, map } from './testData';
+import { formatNumber } from "@alg/index";
 export default {
     setup() {
         const pageTitle = ref("功能测试页面");
@@ -40,6 +41,9 @@ export default {
         for(const [item] of map){
             console.log('%c [ item ]-37', 'font-size:13px; background:pink; color:#bf2c9f;', item);
         }
+        const nn = formatNumber(123456789.99);
+        console.log('%c [ nn ]-45', 'font-size:13px; background:pink; color:#bf2c9f;', nn);
+        
         return {
             pageTitle,
             data

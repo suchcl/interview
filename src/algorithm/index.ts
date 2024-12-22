@@ -4,3 +4,21 @@
  * s = "1294512.12412" => 1,294,512.12412
  * s = "0000123456789.99" => '123,456,789.99'
  */
+
+export function formatNumber(num: number): string {
+  const str = num.toString();
+  const [integer, decimal] = str.split('.');
+  const integerArr = integer.split('').reverse();
+  const formattedInteger = integerArr.reduce((acc, digit, index) => {
+    if (index > 0 && index % 3 === 0) {
+      return digit + ',' + acc;
+    } else {
+      return digit + acc;
+    }
+  }, '');
+  if (decimal) {
+    return formattedInteger + '.' + decimal;
+  } else {
+    return formattedInteger;
+  }
+}
