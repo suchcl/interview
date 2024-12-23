@@ -20,6 +20,9 @@
             <li>年龄: {{ age }}</li>
         </ul>
     </div>
+    <div class="login" v-if="isLogined">登录</div>
+    <div class="login" v-show="isLogined">登录v-show</div>
+    <button @click="login">去登录</button>
 </template>
 
 <script lang="ts">
@@ -30,6 +33,7 @@
             const imgAlt = ref("我的自定义alt")
             const username = ref("");
             const age = ref("");
+            let isLogined = ref(false);
             
             const handleSubmit = () => {
                 const user = {
@@ -38,11 +42,16 @@
                 };
                 console.log('%c [ user ]-36', 'font-size:13px; background:pink; color:#bf2c9f;', user);
             }
+            const login = () => {
+                isLogined.value = !isLogined.value;
+            };
             return {
                 imgSrc,
                 imgAlt,
                 username,
                 age,
+                isLogined,
+                login,
                 handleSubmit
             };
         }
