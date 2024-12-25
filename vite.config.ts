@@ -10,7 +10,8 @@ export default defineConfig({
     alias({
       entries: [
         { find: "@", replacement: path.resolve(__dirname, "./src")},
-        { find: "@alg", replacement: path.resolve(__dirname, "./src/algorithm")}
+        { find: "@alg", replacement: path.resolve(__dirname, "./src/algorithm")},
+        { find: "@service", replacement: path.resolve(__dirname, "./src/service")}
       ]
     })
   ]  
