@@ -7,22 +7,21 @@
         </div>
         <div class="user-center">
             <p>{{ message }}</p>
-            <!-- <Timer :message="message" /> -->
+            <Welcome :message="message" />
         </div>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from 'vue';
-import Timer from "./timer.vue"
+import Welcome from "./Welcome.vue"
 export default {
     name: 'Header',
     components: {
-        Timer
+        Welcome
     },
     setup() {
         const message = ref("欢迎光临!");
-        console.log('%c [ message ]-22', 'font-size:13px; background:pink; color:#bf2c9f;', message);
         return {
             message
         };
@@ -58,6 +57,7 @@ export default {
             }
         }
     }
+
     .user-center {
         padding-right: 20px;
     }
