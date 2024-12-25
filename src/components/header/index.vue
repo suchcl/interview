@@ -1,17 +1,10 @@
 <template>
     <div class="menu">
-        <h2>header</h2>
-        <ul class="nav">
-            <li>
-                <RouterLink to="/home">首页</RouterLink>
-            </li>
-            <li>
-                <RouterLink to="/list">列表页</RouterLink>
-            </li>
-            <li>
-                <router-link to="/test">功能测试页面</router-link>
-            </li>
-        </ul>
+        <div class="nav">
+            <RouterLink to="/home">首页</RouterLink>
+            <RouterLink to="/list">列表页</RouterLink>
+            <router-link to="/test">功能测试页面</router-link>
+        </div>
     </div>
 </template>
 
@@ -27,23 +20,26 @@ export default {
 </script>
 
 <style>
-.nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.menu {
+    height: 100%;
 
-    li {
-        margin: 0 15px;
+    .nav {
+        display: flex;
+        height: 100%;
 
         a {
-            color: #333;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            height: 100%;
+            padding: 0 15px;
 
             &:hover {
-                color: #f20;
+                background-color: #1677ff;
             }
 
             &.router-link-active {
-                color: #f20;
+                background-color: #1677ff;
             }
         }
     }
