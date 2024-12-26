@@ -1,25 +1,50 @@
 <template>
     <div class="user-item">
         <div class="pic">
-            <img src="https://ke-image.ljcdn.com/110000-inspection/d72fdf6d-6425-4d93-9d63-dcef5b87fb8c_1000.jpg!m_fill,w_280,h_210,f_jpg?from=ke.com" alt="">
+            <img :src="item.imgUrl" :alt="item.name">
         </div>
         <div class="user-info">
-            <div class="name">姓名:</div>
-            <div class="birthday">生日:</div>
-            <div class="mobile">电话:</div>
-            <div class="email">邮箱:</div>
-            <div class="address">住址:</div>
+            <div class="name">姓名:{{ item.name }}</div>
+            <div class="birthday">生日: {{ item.birthday }}</div>
+            <div class="mobile">电话:{{ item.mobile }}</div>
+            <div class="email">邮箱:{{ item.email }}</div>
+            <div class="address">住址:{{ item.address }}</div>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    name: "UserItem",
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+
+export default defineComponent({
+    name: 'UserItem',
+    props: {
+        item: {
+            type: Object as PropType<{ id: number, name: string, birthday: string, mobile: string, email: string, address: string, imgUrl: string }>, // 根据实际的 item 结构定义类型
+            required: true
+        }
+    },
     setup() {
         return {
             message: "用户信息"
         }
     }
-}
+});
 </script>
+
+<style scoped>
+.user-item {
+    display: flex;
+    margin-right: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+
+    .pic {
+        margin-right: 20px;
+    }
+
+    .user-info {
+        text-align: left;
+    }
+}
+</style>
