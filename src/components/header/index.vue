@@ -6,14 +6,15 @@
             <router-link to="/test">功能测试页面</router-link>
         </div>
         <div class="user-center">
-            <p>{{ message }}</p>
+            <div class="uname" @click="goUserList">{{ username }}</div>
             <Welcome :title="title" :message="message" />
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
+import { useRouter } from 'vue-router';
 import Welcome from "./Welcome.vue"
 export default {
     name: 'Header',
@@ -21,11 +22,25 @@ export default {
         Welcome
     },
     setup() {
+        const router = useRouter();
         const title = ref("下午好");
         const message = ref("欢迎光临!");
+        let username = ref("");
+        const getuUsername = () => {
+            username.value = localStorage.getItem("username") ?? "";
+        };
+        const goUserList = () => {
+            // 路由跳转
+            router.push("/userList");
+        };
+        onBeforeMount(() => {
+            getuUsername();
+        });
         return {
             title,
-            message
+            message,
+            username,
+            goUserList
         };
     }
 }
