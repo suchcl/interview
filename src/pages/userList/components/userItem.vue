@@ -26,7 +26,7 @@ export default defineComponent({
     },
     setup() {
         return {
-            message: "用户信息"
+            
         }
     }
 });

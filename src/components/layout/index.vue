@@ -3,14 +3,14 @@
         <div class="header">
             <Header />
         </div>
-        <didv class="main">
+        <div class="main">
             <div class="siderbar">
 
             </div>
             <div class="center">
                 <RouterView />
             </div>
-        </didv>
+        </div>
     </div>
 </template>
 <script lang="ts">
