@@ -7,7 +7,7 @@
         </div>
         <div class="user-center">
             <p>{{ message }}</p>
-            <Welcome :message="message" />
+            <Welcome :title="title" :message="message" />
         </div>
     </div>
 </template>
@@ -21,8 +21,10 @@ export default {
         Welcome
     },
     setup() {
+        const title = ref("下午好");
         const message = ref("欢迎光临!");
         return {
+            title,
             message
         };
     }
