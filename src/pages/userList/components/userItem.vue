@@ -1,5 +1,5 @@
 <template>
-    <div class="user-item">
+    <div class="user-item" @click="goProfile">
         <div class="pic">
             <img :src="item.imgUrl" :alt="item.name">
         </div>
@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue';
-
+import { useRouter } from 'vue-router';
 export default defineComponent({
     name: 'UserItem',
     props: {
@@ -25,8 +25,12 @@ export default defineComponent({
         }
     },
     setup() {
+        const router = useRouter();
+        const goProfile = () => {
+            router.push("/userProfile");
+        }
         return {
-
+            goProfile
         }
     }
 });
