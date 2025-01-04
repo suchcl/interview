@@ -1,24 +1,17 @@
 <template>
     <div class="home">
         <h3>{{ title }}</h3>
-        <p v-for="item in terms" key="item.id">{{ item.text }}</p>
+        <button @click="changeTitle">Change Title</button>
     </div>
 </template>
 
 <script setup lang="ts">
-// <h3>和<p>标签分别组成了不同的块，vue3可以分别处理它们的更新，如title的变更则只会重新渲染h3标签，而p标签的更新则只会重新渲染p标签
-import { ref, reactive } from 'vue';
+// 当title改变时，补丁标记可以标识出这是一处“文本更新”，而不是解析整个组件，这样可以更高效的进行DOM更新
+import { ref } from 'vue';
 const title = ref("Home ");
-const terms = reactive([
-    {
-        id: 1,
-        text: "Item 1"
-    },
-    {
-        id: 2,
-        text: "Item 2"
-    }
-]);
+const changeTitle = () => {
+    title.value = "Home Page";
+};
 </script>
 
 <style scoped></style>
