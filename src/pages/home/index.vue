@@ -1,19 +1,24 @@
 <template>
     <div class="home">
-        <h3>首页</h3> <!-- 静态提升 -->
-        {{ message }}
-        {{ concatStr }}
+        <h3>{{ title }}</h3>
+        <p v-for="item in terms" key="item.id">{{ item.text }}</p>
     </div>
 </template>
 
 <script setup lang="ts">
-// <h3>首页</h3>是一个静态节点，vue3会在编译的时候识别并提升它，避免在每次渲染时都重新创建
-import { ref } from 'vue';
-const message = ref('Hello Vue!');
-
-const str1 = "Hello";
-const str2 = "World";
-const concatStr = `${str1},${str2}`; // 预字符串化
+// <h3>和<p>标签分别组成了不同的块，vue3可以分别处理它们的更新，如title的变更则只会重新渲染h3标签，而p标签的更新则只会重新渲染p标签
+import { ref, reactive } from 'vue';
+const title = ref("Home ");
+const terms = reactive([
+    {
+        id: 1,
+        text: "Item 1"
+    },
+    {
+        id: 2,
+        text: "Item 2"
+    }
+]);
 </script>
 
 <style scoped></style>
