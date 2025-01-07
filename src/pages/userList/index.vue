@@ -25,7 +25,7 @@ export default {
                 console.log('%c [ res ]-25', 'font-size:13px; background:pink; color:#bf2c9f;', res);
                 const data = res.data.data;
                 console.log('%c [ data ]-26', 'font-size:13px; background:pink; color:#bf2c9f;', data);
-                // userList.value = data.userList;
+                userList.value = data.userList;
             });
         }
         const postUserList = () => {

@@ -2,28 +2,22 @@
     <div class="profile">
         {{ message }}
         <br>
-        <button class="btn" @click="">详情</button>
+        <button class="btn" @click="getUserDetail">详情</button>
     </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 import axios from "axios";
 axios.create({
     timeout: 1000
 });
-export default {
-    name: 'UserProfile',
-    setup() {
-        const message = ref('用户信息');
-        axios.get("/api/user/info").then(res => {
-            const data = res.data.data.records;
-            console.log('%c [ data ]-18', 'font-size:13px; background:pink; color:#bf2c9f;', data);
-        })
-        return {
-            message
-        }
-    }
+const message = ref('用户信息');
+const getUserDetail = () => {
+    axios.get("/api/user/info").then(res => {
+        const data = res.data.data.records;
+        console.log('%c [ data ]-18', 'font-size:13px; background:pink; color:#bf2c9f;', data);
+    })
 }
 </script>
 
