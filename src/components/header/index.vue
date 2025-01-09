@@ -3,7 +3,7 @@
         <div class="nav">
             <RouterLink to="/home">首页</RouterLink>
             <RouterLink to="/list">列表页</RouterLink>
-            <router-link to="/test">功能测试页面</router-link>
+            <router-link to="/test" target="_blank">功能测试页面</router-link>
         </div>
         <div class="user-center">
             <div class="uname" @click="goUserList">{{ username }}</div>
