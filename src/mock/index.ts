@@ -48,7 +48,8 @@ Mock.mock("/users/getTestUserList", "get", () => {
                     "idcard": /^[1-9]\d{5}(18|19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dXx]$/,
                     "mobile": /1[3456789]\d{9}/,
                     "createTime": "@date('yyyy-MM-dd')",
-                    "gender|1": ["男", "女"]
+                    "gender|1": ["男", "女"],
+                    "imgUrl": "@image('160x120', '#894FC4', '#FFF', 'png', 'Hello')",
                 }
             ]
         }
