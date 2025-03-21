@@ -7,37 +7,42 @@ import Detail from "../pages/detail/index.vue";
 import UserList from "../pages/userList/index.vue";
 import UserProfile from "../pages/userProfile/index.vue";
 import Test from "../pages/test/index.vue";
+import NoteList from "../pages/notes/index.vue";
 
 const routes = [
     {
         path: "/home",
-        component: Home
+        component: Home,
     },
     {
         path: "/list",
-        component: List
+        component: List,
     },
     {
         path: "/detail",
-        component: Detail
+        component: Detail,
     },
     {
         path: "/test",
-        component: Test
+        component: Test,
     },
     {
         path: "/userList",
-        component: UserList
+        component: UserList,
     },
     {
         path: "/userProfile",
-        component: UserProfile
-    }
+        component: UserProfile,
+    },
+    {
+        path: "/noteList",
+        component: NoteList,
+    },
 ];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 });
 
 export default router;
