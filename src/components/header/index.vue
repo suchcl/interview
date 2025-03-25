@@ -22,6 +22,19 @@ export default {
     components: {
         Welcome
     },
+    beforeRouteEnter(to: any, from: any, next: any) {
+        next((vm: any) => {
+            vm.getuUsername();
+        });
+    },
+    beforeRouteUpdate(to: any, from: any, next: any) {
+        next((vm: any) => {
+            vm.getuUsername();
+        });
+    },
+    beforeRouteLeave (to, from, next) {
+        // ...
+    },
     setup() {
         const router = useRouter();
         const title = ref("下午好");
